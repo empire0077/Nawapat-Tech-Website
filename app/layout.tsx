@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Anuphan } from 'next/font/google';
+import { LanguageProvider } from '@/i18n/LanguageContext';
 import './globals.css';
 
 const geist = Geist({
@@ -21,9 +22,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={`${geist.variable} ${anuphan.variable}`}>
+    <html lang="th" className={`${geist.variable} ${anuphan.variable}`}>
       <body className="antialiased font-sans text-onyx bg-white selection:bg-navy selection:text-white leading-relaxed" suppressHydrationWarning>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
