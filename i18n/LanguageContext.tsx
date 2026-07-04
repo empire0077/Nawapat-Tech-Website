@@ -12,8 +12,8 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Set default language to 'th' as requested
-  const [lang, setLang] = useState<Language>('th');
+  // Set default language to 'en' as requested
+  const [lang, setLang] = useState<Language>('en');
 
   useEffect(() => {
     // Update the HTML lang attribute for accessibility and SEO when language changes
