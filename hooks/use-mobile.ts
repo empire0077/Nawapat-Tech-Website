@@ -8,10 +8,13 @@ export function useIsMobile() {
   React.useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
     const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+      setIsMobile(mql.matches)
     }
     mql.addEventListener("change", onChange)
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    // Avoid synchronous state setting in effect by executing asynchronously
+    Promise.resolve().then(() => {
+      setIsMobile(mql.matches)
+    })
     return () => mql.removeEventListener("change", onChange)
   }, [])
 

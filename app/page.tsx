@@ -1,169 +1,358 @@
+'use client';
+
+import { useLanguage } from '@/i18n/LanguageContext';
 import { FadeIn } from '@/components/FadeIn';
 import { Parallax } from '@/components/Parallax';
-import { DataNodes } from '@/components/DataNodes';
-import { BookOpen, BrainCircuit, Activity, Network, Layers, GraduationCap } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Cpu, 
+  Layers, 
+  Network, 
+  Database, 
+  TrendingUp, 
+  ShieldCheck, 
+  Sparkles 
+} from 'lucide-react';
+import Link from 'next/link';
 
-export default function ArchitectPage() {
+export default function HomePage() {
+  const { t, lang } = useLanguage();
+
   return (
-    <main className="min-h-screen bg-white text-onyx pt-24 pb-20 overflow-hidden selection:bg-navy selection:text-white">
-      {/* Background grid overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] blueprint-grid z-0" />
-      
-      {/* SECTION 1: Executive Hero */}
-      <section className="relative z-10 pt-20 pb-32 px-8 md:px-16 lg:px-24 max-w-screen-2xl mx-auto">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-          <div className="flex-1 w-full order-2 lg:order-1">
+    <main className="min-h-screen bg-white text-onyx pt-24 overflow-hidden selection:bg-navy selection:text-white">
+      {/* Background blueprint grid overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02] blueprint-grid z-0" />
+
+      {/* SECTION 1: HERO */}
+      <section className="relative z-10 pt-24 pb-32 px-8 md:px-16 lg:px-24 max-w-screen-2xl mx-auto">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 space-y-8">
             <FadeIn>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-onyx mb-4">
-                Dr. Nawapat Thamchob
-              </h1>
-              <h2 className="text-xl md:text-2xl text-slate mb-8 tracking-wide">
-                Senior Enterprise Architect & AI Strategist
-              </h2>
+              <div className="inline-flex items-center space-x-2 px-3 py-1 bg-slate-50 border border-gray-100 rounded-full text-xs font-mono tracking-widest text-slate uppercase">
+                <Sparkles className="w-3.5 h-3.5 text-onyx animate-pulse" />
+                <span>Enterprise Architecture Evolution</span>
+              </div>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <p className="text-base md:text-lg text-slate leading-relaxed mb-10 max-w-xl border-l-2 border-gray-100 pl-6">
-                &quot;เชื่อมโยงมิติของเทคโนโลยี ธุรกิจ และการสื่อสาร เพื่อสถาปนาระบบนิเวศดิจิทัลระดับองค์กร&quot;
-              </p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] text-onyx">
+                {t.hero.headlineP1}
+                <span className="block mt-2 text-slate-400 font-light font-sans">
+                  {t.hero.headlineP2}
+                </span>
+                {t.hero.headlineHighlight && (
+                  <span className="block mt-2 text-onyx underline decoration-1 underline-offset-8">
+                    {t.hero.headlineHighlight}
+                  </span>
+                )}
+              </h1>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 text-sm font-medium text-slate/80 tracking-wide">
-                <div className="flex items-center space-x-2">
-                  <GraduationCap className="w-4 h-4 text-onyx" />
-                  <span>Ph.D. in Communication Arts</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="w-4 h-4 text-onyx" />
-                  <span>MBA in Marketing</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Layers className="w-4 h-4 text-onyx" />
-                  <span>B.B.A. in Computer & Finance</span>
-                </div>
+              <p className="text-base sm:text-lg md:text-xl text-slate leading-relaxed max-w-2xl font-light">
+                {t.hero.subHeadline}
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="#advisory"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-onyx text-white hover:bg-slate text-sm font-medium tracking-wider uppercase transition-all duration-300 shadow-sm hover:shadow-md"
+                >
+                  <span>{t.hero.cta}</span>
+                  <ArrowRight className="w-4 h-4 ml-3" />
+                </Link>
+                <Link
+                  href="/architect"
+                  className="inline-flex items-center justify-center px-8 py-4 border border-gray-200 hover:border-onyx text-onyx hover:bg-slate-50 text-sm font-medium tracking-wider uppercase transition-all duration-300"
+                >
+                  {lang === 'th' ? 'รู้จักสถาปนิก' : 'Meet the Architect'}
+                </Link>
               </div>
             </FadeIn>
           </div>
-          <div className="flex-1 w-full order-1 lg:order-2 flex justify-center lg:justify-end relative">
-            <FadeIn delay={0.3} direction="left" className="w-full max-w-md">
-               <div className="relative w-full aspect-[4/5] bg-slate-50 rounded-lg border border-gray-100 shadow-sm overflow-hidden group flex items-center justify-center">
-                  <DataNodes />
-                  <span className="text-slate/40 text-sm tracking-widest font-mono uppercase z-10">Portrait Placeholder</span>
-               </div>
+          <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
+            <FadeIn delay={0.4} direction="left" className="w-full max-w-md">
+              <div className="relative w-full aspect-[4/5] bg-slate-50 rounded-lg border border-gray-100 shadow-sm overflow-hidden flex flex-col justify-center p-12 relative group">
+                <div className="absolute inset-0 opacity-[0.03] blueprint-grid" />
+                {/* Visual architectural blueprint lines */}
+                <div className="absolute top-1/4 left-0 right-0 h-px bg-gray-200/50" />
+                <div className="absolute top-2/4 left-0 right-0 h-px bg-gray-200/50" />
+                <div className="absolute top-3/4 left-0 right-0 h-px bg-gray-200/50" />
+                <div className="absolute left-1/4 top-0 bottom-0 w-px bg-gray-200/50" />
+                <div className="absolute left-2/4 top-0 bottom-0 w-px bg-gray-200/50" />
+                <div className="absolute left-3/4 top-0 bottom-0 w-px bg-gray-200/50" />
+                
+                <div className="space-y-6 z-10 relative">
+                  <div className="w-12 h-12 flex items-center justify-center border border-gray-100 bg-white shadow-sm rounded-full">
+                    <Cpu className="w-5 h-5 text-onyx animate-pulse" />
+                  </div>
+                  <h3 className="text-xl font-medium tracking-tight text-onyx font-sans">
+                    {lang === 'th' ? 'สถาปัตยกรรมระดับองค์กรเชิงรับรู้' : 'Cognitive Enterprise Design'}
+                  </h3>
+                  <p className="text-sm text-slate leading-relaxed font-light">
+                    {t.hero.imagePlaceholder}
+                  </p>
+                  <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-mono text-slate tracking-widest">
+                    <span>SYS_ACTIVE: TRUE</span>
+                    <span>ENG_VER: 3.5</span>
+                  </div>
+                </div>
+              </div>
             </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* SECTION 2: Enterprise Transformations */}
-      <section className="py-32 px-8 md:px-16 lg:px-24 bg-slate-50 border-y border-gray-100 relative z-10">
+      {/* SECTION 2: THE PARADIGM SHIFT */}
+      <section id="paradigm" className="py-32 px-8 md:px-16 lg:px-24 bg-slate-50 border-y border-gray-100 relative z-10">
         <div className="max-w-screen-2xl mx-auto">
           <Parallax offset={15}>
-            <FadeIn>
-              <h2 className="text-3xl font-medium tracking-tight mb-16 text-onyx">Enterprise Transformations</h2>
-            </FadeIn>
-          </Parallax>
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-            <FadeIn delay={0.1} className="h-full">
-              <div className="h-full bg-white p-10 md:p-12 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out group relative flex flex-col">
-                <div className="w-10 h-10 flex items-center justify-center mb-8 border border-gray-100 bg-slate-50 group-hover:border-onyx/20 transition-colors duration-300">
-                  <Activity className="w-4 h-4 text-slate group-hover:text-onyx transition-colors duration-300" />
-                </div>
-                <h3 className="text-xl font-medium mb-4 text-onyx tracking-tight">RPA Center of Excellence</h3>
-                <p className="text-slate text-sm leading-relaxed flex-grow">วางแผนแม่บทและสร้างระบบอัตโนมัติกว่า 20 ระบบ ลดภาระงานกว่า 300 ชั่วโมง/ปี</p>
-              </div>
-            </FadeIn>
-            
-            <FadeIn delay={0.2} className="h-full">
-              <div className="h-full bg-white p-10 md:p-12 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out group relative flex flex-col">
-                <div className="w-10 h-10 flex items-center justify-center mb-8 border border-gray-100 bg-slate-50 group-hover:border-onyx/20 transition-colors duration-300">
-                  <BrainCircuit className="w-4 h-4 text-slate group-hover:text-onyx transition-colors duration-300" />
-                </div>
-                <h3 className="text-xl font-medium mb-4 text-onyx tracking-tight">AI Prompt Management</h3>
-                <p className="text-slate text-sm leading-relaxed flex-grow">พัฒนาแพลตฟอร์มคลังองค์ความรู้ Prompt ส่วนกลางระดับองค์กร</p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.3} className="h-full">
-              <div className="h-full bg-white p-10 md:p-12 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out group relative flex flex-col">
-                <div className="w-10 h-10 flex items-center justify-center mb-8 border border-gray-100 bg-slate-50 group-hover:border-onyx/20 transition-colors duration-300">
-                  <Network className="w-4 h-4 text-slate group-hover:text-onyx transition-colors duration-300" />
-                </div>
-                <h3 className="text-xl font-medium mb-4 text-onyx tracking-tight">SCADA & SAP Automation</h3>
-                <p className="text-slate text-sm leading-relaxed flex-grow">วางสถาปัตยกรรมท่อส่งข้อมูล SCADA อัตโนมัติและระบบ SAP แบบบูรณาการ</p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.4} className="h-full">
-              <div className="h-full bg-white p-10 md:p-12 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out group relative flex flex-col">
-                <div className="w-10 h-10 flex items-center justify-center mb-8 border border-gray-100 bg-slate-50 group-hover:border-onyx/20 transition-colors duration-300">
-                  <Layers className="w-4 h-4 text-slate group-hover:text-onyx transition-colors duration-300" />
-                </div>
-                <h3 className="text-xl font-medium mb-4 text-onyx tracking-tight">Competency 360 System</h3>
-                <p className="text-slate text-sm leading-relaxed flex-grow">พัฒนาระบบประเมินสมรรถนะองค์กรดิจิทัล 100% ลดเวลาจาก 2 สัปดาห์เหลือ 2 วัน</p>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3: Thought Leadership & Publications */}
-      <section className="py-32 px-8 md:px-16 lg:px-24 bg-white relative z-10 border-b border-gray-100">
-        <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
-          <div className="md:w-1/3">
-            <Parallax offset={10}>
-              <FadeIn>
-                <h2 className="text-3xl font-medium tracking-tight text-onyx mb-6">Thought Leadership & Publications</h2>
-                <div className="w-12 h-1 bg-onyx/10 mb-8" />
-              </FadeIn>
-            </Parallax>
-          </div>
-          <div className="md:w-2/3">
-            <div className="flex flex-col space-y-12">
-              <FadeIn delay={0.1}>
-                <div className="relative pl-8 md:pl-12 border-l border-gray-100">
-                  <div className="absolute top-0 left-0 -translate-x-1/2 w-3 h-3 bg-white border-2 border-onyx rounded-full" />
-                  <span className="text-xs font-mono text-slate uppercase tracking-widest block mb-2">Book Publication</span>
-                  <h3 className="text-lg font-medium text-onyx mb-2">The Practical Guide to Building AI within Business Process</h3>
-                  <p className="text-slate text-sm">ประยุกต์ใช้กรอบการทำงาน 5 มิติ</p>
-                </div>
-              </FadeIn>
-              
-              <FadeIn delay={0.2}>
-                <div className="relative pl-8 md:pl-12 border-l border-gray-100">
-                  <div className="absolute top-0 left-0 -translate-x-1/2 w-3 h-3 bg-white border-2 border-onyx/30 rounded-full" />
-                  <span className="text-xs font-mono text-slate uppercase tracking-widest block mb-2">Research Article</span>
-                  <h3 className="text-lg font-medium text-onyx mb-2">การเปลี่ยนเป็นทำงานแบบดิจิทัลด้วยเทคโนโลยี RPA</h3>
-                  <p className="text-slate text-sm">PEACON & Innovation</p>
-                </div>
-              </FadeIn>
-
-              <FadeIn delay={0.3}>
-                <div className="relative pl-8 md:pl-12 border-l border-gray-100">
-                  <div className="absolute top-0 left-0 -translate-x-1/2 w-3 h-3 bg-white border-2 border-onyx/30 rounded-full" />
-                  <span className="text-xs font-mono text-slate uppercase tracking-widest block mb-2">Research Article</span>
-                  <h3 className="text-lg font-medium text-onyx mb-2">Determining Distribution Centers Locations Using Weighted K-Means Clustering</h3>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: Capacity Building */}
-      <section className="py-32 px-8 md:px-16 lg:px-24 bg-slate-50 relative z-10 overflow-hidden flex flex-col items-center justify-center min-h-[50vh]">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <Parallax offset={15}>
-            <FadeIn>
-              <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-8 text-onyx">
-                Advanced Specialized Courses<br/>
-                <span className="text-xl text-slate font-normal mt-2 block">(หลักสูตรเฉพาะทางขั้นสูง)</span>
+            <FadeIn className="max-w-3xl">
+              <span className="text-xs font-mono uppercase tracking-widest text-slate block mb-3">
+                {t.paradigm.title}
+              </span>
+              <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-onyx mb-16">
+                {t.paradigm.titleSub}
               </h2>
             </FadeIn>
           </Parallax>
+
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* The Old World */}
+            <FadeIn delay={0.1} className="space-y-8 bg-white p-10 md:p-12 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="flex items-center space-x-3 text-red-500 font-mono text-xs tracking-widest uppercase">
+                <span className="w-2 h-2 rounded-full bg-red-500" />
+                <span>{t.paradigm.oldWorld}</span>
+              </div>
+              <div className="space-y-8">
+                <div className="space-y-3">
+                  <h3 className="text-lg font-medium text-onyx flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-slate" />
+                    {t.paradigm.staticIntel}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.paradigm.staticIntelDesc}
+                  </p>
+                </div>
+                <hr className="border-gray-100" />
+                <div className="space-y-3">
+                  <h3 className="text-lg font-medium text-onyx flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-slate rotate-90" />
+                    {t.paradigm.complexTax}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.paradigm.complexTaxDesc}
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* The New World */}
+            <FadeIn delay={0.2} className="space-y-8 bg-white p-10 md:p-12 border border-onyx/20 shadow-md hover:shadow-lg transition-all duration-300 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-green-500/5 to-transparent pointer-events-none" />
+              <div className="flex items-center space-x-3 text-emerald-600 font-mono text-xs tracking-widest uppercase">
+                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping" />
+                <span>{t.paradigm.newWorld}</span>
+              </div>
+              <div className="space-y-8">
+                <div className="space-y-3">
+                  <h3 className="text-lg font-medium text-onyx flex items-center gap-2">
+                    <Network className="w-4 h-4 text-emerald-600" />
+                    {t.paradigm.livingAssets}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.paradigm.livingAssetsDesc}
+                  </p>
+                </div>
+                <hr className="border-gray-100" />
+                <div className="space-y-3">
+                  <h3 className="text-lg font-medium text-onyx flex items-center gap-2">
+                    <Cpu className="w-4 h-4 text-emerald-600" />
+                    {t.paradigm.scalableJudge}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.paradigm.scalableJudgeDesc}
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: STRATEGIC FRAMEWORKS */}
+      <section id="frameworks" className="py-32 px-8 md:px-16 lg:px-24 bg-white relative z-10">
+        <div className="max-w-screen-2xl mx-auto">
+          <Parallax offset={10}>
+            <FadeIn className="max-w-3xl mb-16">
+              <span className="text-xs font-mono uppercase tracking-widest text-slate block mb-3">
+                Methodologies
+              </span>
+              <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-onyx">
+                {t.frameworks.title}
+              </h2>
+            </FadeIn>
+          </Parallax>
+
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            {/* Framework 1 */}
+            <FadeIn delay={0.1} className="h-full">
+              <div className="h-full bg-slate-50 p-10 border border-gray-100 hover:border-onyx/20 transition-all duration-300 ease-out flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono text-slate block mb-6">01 / ARCHITECTURE</span>
+                  <h3 className="text-xl font-medium text-onyx mb-4 tracking-tight">
+                    {t.frameworks.f1Title}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.frameworks.f1Desc}
+                  </p>
+                </div>
+                <div className="pt-8 mt-8 border-t border-gray-200/50 flex items-center justify-between text-xs font-mono text-slate">
+                  <span>DIM_MODEL: 5D</span>
+                  <span>EVALUATION</span>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Framework 2 */}
+            <FadeIn delay={0.2} className="h-full">
+              <div className="h-full bg-slate-50 p-10 border border-gray-100 hover:border-onyx/20 transition-all duration-300 ease-out flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono text-slate block mb-6">02 / STRUCTURE</span>
+                  <h3 className="text-xl font-medium text-onyx mb-4 tracking-tight">
+                    {t.frameworks.f2Title}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.frameworks.f2Desc}
+                  </p>
+                </div>
+                <div className="pt-8 mt-8 border-t border-gray-200/50 flex items-center justify-between text-xs font-mono text-slate">
+                  <span>PYR_MODEL: ORG_CAP</span>
+                  <span>DECOUPLING</span>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Framework 3 */}
+            <FadeIn delay={0.3} className="h-full">
+              <div className="h-full bg-slate-50 p-10 border border-gray-100 hover:border-onyx/20 transition-all duration-300 ease-out flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono text-slate block mb-6">03 / HORIZON</span>
+                  <h3 className="text-xl font-medium text-onyx mb-4 tracking-tight">
+                    {t.frameworks.f3Title}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.frameworks.f3Desc}
+                  </p>
+                </div>
+                <div className="pt-8 mt-8 border-t border-gray-200/50 flex items-center justify-between text-xs font-mono text-slate">
+                  <span>FORESIGHT: PREDICTIVE</span>
+                  <span>EVOLUTION</span>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: SHOWCASE */}
+      <section id="showcase" className="py-32 px-8 md:px-16 lg:px-24 bg-slate-50 border-t border-gray-100 relative z-10">
+        <div className="max-w-screen-2xl mx-auto">
+          <Parallax offset={15}>
+            <FadeIn className="max-w-3xl mb-16">
+              <span className="text-xs font-mono uppercase tracking-widest text-slate block mb-3">
+                Applied Innovations
+              </span>
+              <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-onyx">
+                {t.showcase.title}
+              </h2>
+            </FadeIn>
+          </Parallax>
+
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+            {/* Showcase 1 */}
+            <FadeIn delay={0.1} className="h-full">
+              <div className="h-full bg-white p-10 md:p-12 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                <div className="space-y-6">
+                  <div className="w-10 h-10 flex items-center justify-center border border-gray-100 bg-slate-50">
+                    <Database className="w-4 h-4 text-slate" />
+                  </div>
+                  <h3 className="text-xl font-medium text-onyx tracking-tight">
+                    {t.showcase.s1Title}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.showcase.s1Desc}
+                  </p>
+                </div>
+                <div className="pt-8 mt-8 border-t border-gray-100 flex items-center justify-between text-xs font-mono text-slate">
+                  <span>TELEMETRY SCALING</span>
+                  <span className="text-emerald-600 font-semibold">DEPLOYED</span>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Showcase 2 */}
+            <FadeIn delay={0.2} className="h-full">
+              <div className="h-full bg-white p-10 md:p-12 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                <div className="space-y-6">
+                  <div className="w-10 h-10 flex items-center justify-center border border-gray-100 bg-slate-50">
+                    <Network className="w-4 h-4 text-slate" />
+                  </div>
+                  <h3 className="text-xl font-medium text-onyx tracking-tight">
+                    {t.showcase.s2Title}
+                  </h3>
+                  <p className="text-slate text-sm leading-relaxed font-light">
+                    {t.showcase.s2Desc}
+                  </p>
+                </div>
+                <div className="pt-8 mt-8 border-t border-gray-100 flex items-center justify-between text-xs font-mono text-slate">
+                  <span>SELF-HEALING SEMANTICS</span>
+                  <span className="text-emerald-600 font-semibold">DEPLOYED</span>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+
+          <FadeIn delay={0.3} className="mt-12 text-center">
+            <Link
+              href="#advisory"
+              className="inline-flex items-center text-xs uppercase tracking-widest font-mono text-onyx hover:text-slate border-b border-onyx pb-1 transition-all duration-300"
+            >
+              <span>{t.showcase.cta}</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-2 inline" />
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* SECTION 5: ADVISORY */}
+      <section id="advisory" className="py-32 px-8 md:px-16 lg:px-24 bg-white relative z-10 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.01] blueprint-grid z-0" />
+        <div className="max-w-4xl mx-auto text-center space-y-12 relative z-10">
+          <FadeIn>
+            <div className="w-16 h-16 mx-auto flex items-center justify-center border border-gray-100 bg-slate-50 rounded-full mb-8">
+              <ShieldCheck className="w-6 h-6 text-onyx" />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-onyx max-w-2xl mx-auto leading-tight">
+              {t.advisory.title}
+            </h2>
+          </FadeIn>
+          
           <FadeIn delay={0.1}>
-            <p className="text-base md:text-lg text-slate leading-relaxed">
-              ผู้ออกแบบและบรรยายหลักสูตรเฉพาะทางขั้นสูงด้าน Artificial Intelligence (มากกว่า 50 รุ่น) และ Automation (มากกว่า 40 รุ่น) ขับเคลื่อนศักยภาพบุคลากรระดับประเทศ
+            <p className="text-slate text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
+              {lang === 'th' 
+                ? 'ร่วมสนทนากลยุทธ์เพื่อปรับสถาปัตยกรรมระดับองค์กรของคุณให้ตอบรับกับอนาคต AI แบบไร้รอยต่อ' 
+                : 'Initiate a direct dialogue with Dr. Nawapat Thamchob to design an intelligent, high-resiliency digital footprint for your enterprise.'}
             </p>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <a
+              href="mailto:nawapat@gmail.com"
+              className="inline-flex items-center justify-center px-10 py-5 bg-onyx text-white hover:bg-slate text-sm font-medium tracking-wider uppercase transition-all duration-300 shadow-sm hover:shadow-md"
+            >
+              <span>{t.advisory.cta}</span>
+              <ArrowRight className="w-4 h-4 ml-3" />
+            </a>
           </FadeIn>
         </div>
       </section>
