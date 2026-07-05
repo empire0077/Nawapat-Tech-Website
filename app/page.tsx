@@ -13,7 +13,9 @@ import {
   ShieldCheck, 
   Sparkles 
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import em11Image from '../assets/Em11.png';
 
 export default function HomePage() {
   const { t, lang } = useLanguage();
@@ -82,6 +84,14 @@ export default function HomePage() {
                 <div className="absolute left-3/4 top-0 bottom-0 w-px bg-gray-200/50" />
                 
                 <div className="space-y-6 z-10 relative">
+                  <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm">
+                    <Image
+                      src={em11Image}
+                      alt={lang === 'th' ? 'ภาพสถาปัตยกรรมระดับองค์กร' : 'Enterprise architecture visual'}
+                      className="h-full w-full object-cover"
+                      priority
+                    />
+                  </div>
                   <div className="w-12 h-12 flex items-center justify-center border border-gray-100 bg-white shadow-sm rounded-full">
                     <Cpu className="w-5 h-5 text-onyx animate-pulse" />
                   </div>
